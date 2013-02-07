@@ -6,5 +6,4 @@ chromedriver.log
 coverage/
 db.sqlite
 dist/
-media/
-static/
+media
