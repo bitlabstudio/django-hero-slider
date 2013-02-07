@@ -1,7 +1,6 @@
 """Factories for the ``hero_slider`` app."""
-from django.core.files import File as DjangoFile
-
 import factory
+
 from filer.models.imagemodels import Image
 
 from hero_slider.models import SliderItem, SliderItemTitle

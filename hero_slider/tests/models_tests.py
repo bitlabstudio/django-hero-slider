@@ -2,7 +2,6 @@
 from django.test import TestCase
 
 from hero_slider.tests.factories import (
-    FilerImageFactory,
     SliderItemFactory,
     SliderItemTitleENFactory,
 )
@@ -13,7 +12,6 @@ class SliderItemTestCase(TestCase):
     longMessage = True
 
     def test_model(self):
-        foo = FilerImageFactory()
         instance = SliderItemFactory()
         self.assertTrue(instance.pk, msg=(
             'Should be able to instantiate and save the model.'))
