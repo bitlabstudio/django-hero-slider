@@ -12,8 +12,10 @@ South==0.7.6
 # ==============================================================
 # Packages needed for running the tests. Needed by contributors.
 # ==============================================================
+factory-boy
 Fabric
 mock
 django-nose
 coverage
 django-coverage
+flake8
