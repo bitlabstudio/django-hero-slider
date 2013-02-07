@@ -1,7 +1,5 @@
-Django Hero Slider 
+Django Hero Slider
 ==================
-
-EARLY ALPHA! DO NOT USE THIS!
 
 A Django application for defining images that should be shown on the frontpage
 of your website in a slider. Each image can have a title, description and
@@ -27,7 +25,7 @@ If you feel adventurous and want to install the latest commit from GitHub::
 
     $ pip install -e git://github.com/bitmazk/django-hero-slider.git#egg=hero_slider
 
-Add ``filer``, ``easy_thumbnails``  and ``hero_slider`` to your 
+Add ``filer``, ``easy_thumbnails``  and ``hero_slider`` to your
 ``INSTALLED_APPS``::
 
     INSTALLED_APPS = (
@@ -35,6 +33,14 @@ Add ``filer``, ``easy_thumbnails``  and ``hero_slider`` to your
         'filer',
         'easy_thumbnails'
         'hero_slider',
+    )
+
+Include the urls for this app::
+
+
+    urlpatterns = patterns(
+        '',
+        url(r'^hero-slider/', include('hero_slider.urls')),
     )
 
 Run the South migrations::
@@ -45,7 +51,27 @@ Run the South migrations::
 Usage
 -----
 
-TODO: Describe usage
+Login to the Django admin and create some SliderItem objects. Each SliderItem
+should point to some other object (with a generic foreign key).
+
+In your template you can display the slider like this::
+
+    {% load hero_slider_tags %}
+
+    {% render_hero_slider %}
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        // put all your jQuery goodness in here.
+        $('.carousel').carousel({
+            /* interval: 3000 */
+        })
+    });
+    </script>
+
+
+If you want to change the look and feel of the slider, just override the
+``hero_slider/carousel.html`` template.
 
 
 Contribute

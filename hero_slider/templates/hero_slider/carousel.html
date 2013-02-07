@@ -1,0 +1,21 @@
+<div id="myCarousel" class="carousel slide thumbnail">
+    <div class="carousel-inner">
+        {% for item in slider_items %}
+            <div class="item active">
+                <a href="#">
+                    <img src="{{ item.image.url }}" />
+                    <div class="carousel-caption">
+                        {% with item.get_trans as item_trans %}
+                        {% if item_trans.title %}<h4>{{ item_trans.title }}</h4>{% endif %}
+                        {% if item_trans.description %}<p>{{ item_trans.description }}</p>{% endif %}
+                        {% endwith %}
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    {% if slider_items.count %}
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">›</a>
+    {% endif %}
+</div>

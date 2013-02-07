@@ -2,7 +2,11 @@
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
+
+from simple_translation.utils import get_translation_queryset
+
 
 from filer.fields.file import FilerFileField
 
@@ -32,6 +36,11 @@ class SliderItem(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    def get_trans(self):
+        """Returns the translation object for this slider item."""
+        lang = get_language()
+        return get_translation_queryset(self).filter(language=lang)[0]
 
 
 class SliderItemTitle(models.Model):
