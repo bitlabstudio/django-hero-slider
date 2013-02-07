@@ -12,11 +12,20 @@ DATABASES = {
     }
 }
 
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = (
+    ('en', 'English'),
+    ('de', 'German'),
+)
+
 ROOT_URLCONF = 'hero_slider.tests.urls'
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
-STATIC_ROOT = os.path.join(__file__, '../../static/')
+STATIC_ROOT = os.path.join(__file__, '../../../static/')
+MEDIA_ROOT = os.path.join(__file__, '../../../media/')
 
 STATICFILES_DIRS = (
     os.path.join(__file__, 'test_static'),

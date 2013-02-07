@@ -1,0 +1,10 @@
+{% extends "admin/change_form.html" %}
+{% load url from future %}
+
+{% block extrahead %}{{ block.super }}
+<script type="text/javascript">
+    var static_url = '{{ STATIC_URL }}';
+    var get_ctype_url = '{% url "get_ctype_details" %}';
+</script>
+<script type="text/javascript" src="{{ STATIC_URL }}hero_slider/js/generic_raw_id_field.js"></script>
+{% endblock %}
