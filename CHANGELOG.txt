@@ -1,3 +1,7 @@
+=== ongoing ===
+
+- Properly returning best translation for objects.
+
 === 0.1 ===
 
 Initial commit

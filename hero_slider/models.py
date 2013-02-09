@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
 
-from simple_translation.utils import get_translation_queryset
+from simple_translation.utils import get_preferred_translation_from_lang
 
 
 from filer.fields.file import FilerFileField
@@ -40,7 +40,7 @@ class SliderItem(models.Model):
     def get_trans(self):
         """Returns the translation object for this slider item."""
         lang = get_language()
-        return get_translation_queryset(self).filter(language=lang)[0]
+        return get_preferred_translation_from_lang(self, lang)
 
 
 class SliderItemTitle(models.Model):

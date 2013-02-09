@@ -4,7 +4,7 @@ from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
 
 from simple_translation.admin import TranslationAdmin
-from simple_translation.utils import get_translation_queryset
+from simple_translation.utils import get_preferred_translation_from_lang
 
 from hero_slider.models import SliderItem
 
@@ -15,7 +15,7 @@ class SliderItemAdmin(TranslationAdmin):
 
     def title(self, obj):
         lang = get_language()
-        return get_translation_queryset(obj).filter(language=lang)[0].title
+        return get_preferred_translation_from_lang(obj, lang).title
     title.short_description = _('Title')
 
 
