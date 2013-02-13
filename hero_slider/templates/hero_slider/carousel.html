@@ -3,11 +3,11 @@
         {% for item in slider_items %}
             <div class="item active">
                 <a href="#">
-                    <img src="{{ item.image.url }}" />
+                    <img src="{{ item.image.url }}" alt="" />
                     <div class="carousel-caption">
                         {% with item.get_trans as item_trans %}
-                        {% if item_trans.title %}<h4>{{ item_trans.title }}</h4>{% endif %}
-                        {% if item_trans.description %}<p>{{ item_trans.description }}</p>{% endif %}
+                            {% if item_trans.title %}<h4>{{ item_trans.title }}</h4>{% endif %}
+                            {% if item_trans.description %}<p>{{ item_trans.description }}</p>{% endif %}
                         {% endwith %}
                     </div>
                 </a>
