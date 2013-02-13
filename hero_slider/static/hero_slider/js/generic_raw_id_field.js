@@ -1,11 +1,11 @@
-var $ = django.jQuery
+var $ = django.jQuery;
 $(document).ready(function(){
     $('#id_object_id').parent().append('<div id="lookup_box"></div>');
     $('#id_content_type').change(function () {
         var $selected = $('#id_content_type option:selected')
         var type = $selected.text();
         var pk = $selected.val();
-        if (type === '---------') {
+        if (pk === '') {
             $('#lookup_box').html('Select content type first...');
         } else {
             $.get(
