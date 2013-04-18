@@ -49,6 +49,7 @@ class SliderItemTitle(models.Model):
 
     :title: The title of this slider item.
     :description: A short description of this slider item.
+    :is_published: If True, this will not show up.
 
     """
     title = models.CharField(
@@ -61,6 +62,11 @@ class SliderItemTitle(models.Model):
         max_length=512,
         verbose_name=_('Description'),
         blank=True,
+    )
+
+    is_published = models.BooleanField(
+        verbose_name=_('Is published'),
+        default=False,
     )
 
     # Needed by simple-translation
