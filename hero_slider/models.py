@@ -11,6 +11,26 @@ from simple_translation.utils import get_preferred_translation_from_lang
 from filer.fields.file import FilerFileField
 
 
+class SliderItemManager(models.Manager):
+    """Custom manager for the ``SliderItem`` model."""
+    def published(self, request):
+        """
+        Returns the published slider items in the current language.
+
+        :param request: A Request instance.
+
+        """
+        qs = self.get_query_set()
+        language = getattr(request, 'LANGUAGE_CODE', None)
+        if not language:
+            return qs.filter(slideritemtitle__is_published=True)
+        qs = qs.filter(
+            slideritemtitle__is_published=True,
+            slideritemtitle__language=language,
+        )
+        return qs
+
+
 class SliderItem(models.Model):
     """
     Resembles an item that should be shown on the front page in a slider.
@@ -36,6 +56,8 @@ class SliderItem(models.Model):
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    objects = SliderItemManager()
 
     def get_trans(self):
         """Returns the translation object for this slider item."""

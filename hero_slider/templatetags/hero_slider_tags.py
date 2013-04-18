@@ -7,13 +7,14 @@ from hero_slider.models import SliderItem
 register = template.Library()
 
 
-@register.inclusion_tag('hero_slider/carousel.html')
-def render_hero_slider():
+@register.inclusion_tag('hero_slider/carousel.html', takes_context=True)
+def render_hero_slider(context):
     """
     Renders the hero slider.
 
     """
-    qs = SliderItem.objects.all().order_by('position')
+    req = context.get('request')
+    qs = SliderItem.objects.published(req).order_by('position')
     return {
         'slider_items': qs,
     }

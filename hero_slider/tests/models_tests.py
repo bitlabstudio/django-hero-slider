@@ -1,8 +1,12 @@
 """Tests for the models of the ``hero_slider`` app."""
+from mock import Mock
+
 from django.test import TestCase
 
-from hero_slider.tests.factories import (
+from ..models import SliderItem
+from .factories import (
     SliderItemFactory,
+    SliderItemTitleDEFactory,
     SliderItemTitleENFactory,
 )
 
@@ -20,6 +24,28 @@ class SliderItemTestCase(TestCase):
         item_trans = SliderItemTitleENFactory()
         self.assertEqual(item_trans.slider_item.get_trans(), item_trans, msg=(
             'Should return the translation object for the current language'))
+
+
+class SliderItemManagerTestCase(TestCase):
+    """Tests for the ``SliderItemManager`` model manager."""
+    longMessage = True
+
+    def setUp(self):
+        self.en_title = SliderItemTitleENFactory(is_published=False)
+        self.de_title = SliderItemTitleDEFactory(
+            slider_item=self.en_title.slider_item)
+
+    def test_manager(self):
+        """Test if the ``SliderItemManager`` retrieves the correct objects."""
+        request = Mock(LANGUAGE_CODE='de')
+        self.assertEqual(
+            SliderItem.objects.published(request).count(), 1, msg=(
+                'In German, there should be one published slider item.'))
+
+        request = Mock(LANGUAGE_CODE='en')
+        self.assertEqual(
+            SliderItem.objects.published(request).count(), 0, msg=(
+                'In English, there should be no published slider items.'))
 
 
 class SliderItemTitleTestCase(TestCase):

@@ -43,6 +43,7 @@ class SliderItemTitleENFactory(SliderItemTitleFactoryBase):
     title = 'A title'
     description = 'A description'
     language = 'en'
+    is_published = True
 
 
 class SliderItemTitleDEFactory(SliderItemTitleFactoryBase):
@@ -50,3 +51,4 @@ class SliderItemTitleDEFactory(SliderItemTitleFactoryBase):
     title = 'Ein Titel'
     description = 'Eine Beschreibung'
     language = 'de'
+    is_published = True
