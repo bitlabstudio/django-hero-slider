@@ -10,7 +10,7 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
         # Note: Remember to use orm['appname.ModelName'] rather than "from appname.models..."
-        for title in orm['hero_slider.SliderItemTitle']:
+        for title in orm['hero_slider.SliderItemTitle'].objects.all():
             title.is_published = True
             title.save()
 
