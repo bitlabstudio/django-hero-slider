@@ -43,6 +43,10 @@ COVERAGE_MODULE_EXCLUDES = [
     'migrations', 'fixtures', 'admin$', 'django_extensions',
 ]
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+)
+
 THUMBNAIL_PROCESSORS = (
     'easy_thumbnails.processors.colorspace',
     'easy_thumbnails.processors.autocrop',

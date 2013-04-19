@@ -32,8 +32,10 @@ class SliderItemManagerTestCase(TestCase):
 
     def setUp(self):
         self.en_title = SliderItemTitleENFactory(is_published=False)
-        self.de_title = SliderItemTitleDEFactory(
-            slider_item=self.en_title.slider_item)
+        SliderItemTitleDEFactory(slider_item=self.en_title.slider_item)
+
+        self.de_title = SliderItemTitleDEFactory(is_published=False)
+        SliderItemTitleENFactory(slider_item=self.de_title.slider_item)
 
     def test_manager(self):
         """Test if the ``SliderItemManager`` retrieves the correct objects."""
@@ -44,8 +46,13 @@ class SliderItemManagerTestCase(TestCase):
 
         request = Mock(LANGUAGE_CODE='en')
         self.assertEqual(
+            SliderItem.objects.published(request).count(), 1, msg=(
+                'In English, there should be one published slider item.'))
+
+        request = Mock(LANGUAGE_CODE=None)
+        self.assertEqual(
             SliderItem.objects.published(request).count(), 0, msg=(
-                'In English, there should be no published slider items.'))
+                'If no language is set, there should be no slider items.'))
 
 
 class SliderItemTitleTestCase(TestCase):
