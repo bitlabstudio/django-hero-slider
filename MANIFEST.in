@@ -4,6 +4,6 @@ include DESCRIPTION
 include CHANGELOG.txt
 include README.md
 graft hero_slider
-global-exclude *.orig *.pyc *.log
+global-exclude *.orig *.pyc *.log *.swp
 prune hero_slider/tests/coverage/
 prune hero_slider/.ropeproject/
