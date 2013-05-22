@@ -1,5 +1,6 @@
 === ongoing ===
 
+- Using the MultilingualPublishMixin from django-libs
 - Added is_published to SliderItemTitle to be able to publish items for
   seperate languages
 - Properly returning best translation for objects.

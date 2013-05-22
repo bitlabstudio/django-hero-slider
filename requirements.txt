@@ -8,6 +8,7 @@ Pillow==1.7.8
 django-filer==0.9.3
 simple-translation==0.8.6
 South==0.7.6
+django-libs
 
 
 # ==============================================================
