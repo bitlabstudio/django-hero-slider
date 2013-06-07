@@ -1,5 +1,7 @@
 === ongoing ===
 
+=== 0.2.1 ===
+
 - Bugfix: raw_id_field now also works when having a custom admin url
 
 === 0.2 ===
