@@ -1,5 +1,8 @@
 === ongoing ===
 
+
+=== 0.2.2 ===
+
 - added external_url field to SliderItem making the gfk optional
 
 === 0.2.1 ===
