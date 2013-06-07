@@ -2,7 +2,7 @@
     <div class="carousel-inner">
         {% for item in slider_items %}
             <div class="item active">
-                <a href="#">
+                <a href="{{ item.get_item_url }}">
                     <img src="{{ item.image.url }}" alt="" />
                     <div class="carousel-caption">
                         {% with item.get_trans as item_trans %}

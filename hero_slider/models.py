@@ -41,6 +41,7 @@ class SliderItem(models.Model):
     :position: Can be set in order to control the ordering of the slider items.
     :content_type: The contenttype of the object this slider item links to.
     :object_id: The PK of the object this slider item links to.
+    :external_url: URL to link to items without the need of a gfk.
 
     """
     image = FilerFileField(
@@ -53,9 +54,15 @@ class SliderItem(models.Model):
     )
 
     # Generic foreign key
-    content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, blank=True, null=True)
+    object_id = models.PositiveIntegerField(blank=True, null=True)
     content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    external_url = models.CharField(
+        verbose_name=_('External URL'),
+        max_length=512,
+        blank=True,
+    )
 
     objects = SliderItemManager()
 
@@ -63,6 +70,13 @@ class SliderItem(models.Model):
         """Returns the translation object for this slider item."""
         lang = get_language()
         return get_preferred_translation_from_lang(self, lang)
+
+    def get_item_url(self):
+        """Returns the url of the connected item."""
+        try:
+            return self.content_object.get_absolute_url()
+        except AttributeError:
+            return self.external_url
 
 
 class SliderItemTitle(models.Model):
