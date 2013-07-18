@@ -7,7 +7,16 @@ from django_libs.admin import MultilingualPublishMixin
 from simple_translation.admin import TranslationAdmin
 from simple_translation.utils import get_preferred_translation_from_lang
 
-from hero_slider.models import SliderItem
+from . import models
+
+
+class SliderItemCategoryAdmin(TranslationAdmin):
+    """Admin for the ``SliderItemCategory`` model."""
+    list_display = ['slug', 'name']
+
+    def name(self, obj):
+        return obj.get_translation().name
+    name.short_description = _('Name')
 
 
 class SliderItemAdmin(MultilingualPublishMixin, TranslationAdmin):
@@ -20,4 +29,5 @@ class SliderItemAdmin(MultilingualPublishMixin, TranslationAdmin):
     title.short_description = _('Title')
 
 
-admin.site.register(SliderItem, SliderItemAdmin)
+admin.site.register(models.SliderItem, SliderItemAdmin)
+admin.site.register(models.SliderItemCategory, SliderItemCategoryAdmin)

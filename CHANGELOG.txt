@@ -1,5 +1,7 @@
 === ongoing ===
 
+- Added SliderItemCategory admin
+
 === 0.3 ===
 
 - Added SliderItemCategory model
