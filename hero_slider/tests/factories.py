@@ -1,10 +1,12 @@
+# -*- coding: utf-8 -*-
 """Factories for the ``hero_slider`` app."""
 import factory
 
+from django_libs.tests.factories import SimpleTranslationMixin
 from filer.models.imagemodels import Image
 
-from hero_slider.models import SliderItem, SliderItemTitle
-from hero_slider.tests.test_app.models import DummyModel
+from .. import models
+from .test_app.models import DummyModel
 
 
 class DummyModelFactory(factory.Factory):
@@ -23,9 +25,27 @@ class FilerImageFactory(factory.Factory):
     file = None
 
 
+class SliderItemCategoryFactory(SimpleTranslationMixin, factory.Factory):
+    """Factory for ``SliderItemCategory`` objects."""
+    FACTORY_FOR = models.SliderItemCategory
+
+    @staticmethod
+    def _get_translation_factory_and_field():
+        return (SliderItemCategoryTitleFactory, 'slider_item_category')
+
+
+class SliderItemCategoryTitleFactory(factory.Factory):
+    """Factory for ``SliderItemCategoryTitle`` objects."""
+    FACTORY_FOR = models.SliderItemCategoryTitle
+
+    name = 'Cätegory'
+    slider_item_category = factory.SubFactory(SliderItemCategoryFactory)
+    language = 'en'
+
+
 class SliderItemFactory(factory.Factory):
     """Factory for ``SliderItem`` objects."""
-    FACTORY_FOR = SliderItem
+    FACTORY_FOR = models.SliderItem
 
     image = factory.SubFactory(FilerImageFactory)
     content_object = factory.SubFactory(DummyModelFactory)
@@ -33,7 +53,7 @@ class SliderItemFactory(factory.Factory):
 
 class SliderItemTitleFactoryBase(factory.Factory):
     """Base class for ``SliderItemTitle`` factories."""
-    FACTORY_FOR = SliderItemTitle
+    FACTORY_FOR = models.SliderItemTitle
 
     slider_item = factory.SubFactory(SliderItemFactory)
 
