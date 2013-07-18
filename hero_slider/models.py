@@ -67,7 +67,7 @@ class SliderItemManager(models.Manager):
         return qs
 
 
-class SliderItem(models.Model):
+class SliderItem(SimpleTranslationMixin, models.Model):
     """
     Resembles an item that should be shown on the front page in a slider.
 

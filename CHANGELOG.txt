@@ -1,5 +1,7 @@
 === ongoing ===
 
+- Added get_slider_items assignment tag
+
 === 0.3.1 ===
 
 - Added SliderItemCategory admin

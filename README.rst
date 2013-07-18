@@ -69,6 +69,13 @@ In your template you can display the slider like this::
     });
     </script>
 
+Alternatively you can use the ``get_slider_items`` assignment tag::
+
+    {% load hero_slider_tags %}
+
+    {% get_slider_items as items %}
+    {% include "some_template/slider.html with items=items %}
+
 
 If you want to change the look and feel of the slider, just override the
 ``hero_slider/carousel.html`` template.

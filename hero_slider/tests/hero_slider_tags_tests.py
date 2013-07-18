@@ -2,11 +2,28 @@
 from django.template import RequestContext
 from django.test import TestCase, RequestFactory
 
-from hero_slider.templatetags.hero_slider_tags import render_hero_slider
+from hero_slider.templatetags.hero_slider_tags import (
+    get_slider_items,
+    render_hero_slider,
+)
 from hero_slider.tests.factories import (
     SliderItemTitleDEFactory,
     SliderItemTitleENFactory,
 )
+
+
+class GetSliderItemsTestCase(TestCase):
+    """Tests for the ``get_slider_items`` templatetag."""
+    longMessage = True
+
+    def test_tag(self):
+        SliderItemTitleENFactory()
+        req = RequestFactory().get('/')
+        req.LANGUAGE_CODE = 'en'
+        context = RequestContext(req)
+        result = get_slider_items(context)
+        self.assertEqual(result.count(), 1, msg=(
+            'Should return the published slider items.'))
 
 
 class RenderHeroSliderTestCase(TestCase):
