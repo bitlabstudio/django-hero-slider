@@ -8,10 +8,13 @@ register = template.Library()
 
 
 @register.assignment_tag(takes_context=True)
-def get_slider_items(context):
+def get_slider_items(context, amount=None):
     """Returns the published slider items."""
     req = context.get('request')
-    return SliderItem.objects.published(req).order_by('position')
+    qs = SliderItem.objects.published(req).order_by('position')
+    if amount:
+        qs = qs[:amount]
+    return qs
 
 
 @register.inclusion_tag('hero_slider/carousel.html', takes_context=True)
