@@ -1,5 +1,7 @@
 === ongoing ===
 
+=== 0.3.3 ===
+
 - Added amount parameter to get_slider_items tag
 
 === 0.3.2 ===
