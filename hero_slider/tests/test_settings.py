@@ -19,7 +19,7 @@ LANGUAGES = (
     ('de', 'German'),
 )
 
-ROOT_URLCONF = 'hero_slider.tests.urls'
+ROOT_URLCONF = 'hero_slider.tests.test_app.urls'
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
