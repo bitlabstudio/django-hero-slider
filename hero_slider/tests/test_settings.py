@@ -43,8 +43,26 @@ COVERAGE_MODULE_EXCLUDES = [
     'migrations', 'fixtures', 'admin$', 'django_extensions',
 ]
 
+MIDDLEWARE_CLASSES = (
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.doc.XViewMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'cms.middleware.page.CurrentPageMiddleware',
+    'cms.middleware.user.CurrentUserMiddleware',
+    'cms.middleware.toolbar.ToolbarMiddleware',
+    'cms.middleware.language.LanguageCookieMiddleware',
+)
+
 TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.i18n',
     'django.core.context_processors.request',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
 )
 
 THUMBNAIL_PROCESSORS = (
@@ -67,6 +85,11 @@ EXTERNAL_APPS = [
     'django_nose',
     'filer',
     'easy_thumbnails',
+    'hvad',
+    'cms',
+    'mptt',
+    'menus',
+    'sekizai',
 ]
 
 INTERNAL_APPS = [
@@ -77,3 +100,5 @@ INTERNAL_APPS = [
 INSTALLED_APPS = EXTERNAL_APPS + INTERNAL_APPS
 
 COVERAGE_MODULE_EXCLUDES += EXTERNAL_APPS
+
+SECRET_KEY = 'foobar'

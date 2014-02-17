@@ -1,32 +1,34 @@
 """Admin classes for the ``hero_slider`` app."""
 from django.contrib import admin
-from django.utils.translation import get_language
 from django.utils.translation import ugettext_lazy as _
 
-from django_libs.admin import MultilingualPublishMixin
-from simple_translation.admin import TranslationAdmin
-from simple_translation.utils import get_preferred_translation_from_lang
+from hvad.admin import TranslatableAdmin
 
 from . import models
 
 
-class SliderItemCategoryAdmin(TranslationAdmin):
+class SliderItemCategoryAdmin(TranslatableAdmin):
     """Admin for the ``SliderItemCategory`` model."""
-    list_display = ['slug', 'name']
+    list_display = ['slug', 'get_name', 'all_translations']
 
-    def name(self, obj):
-        return obj.get_translation().name
-    name.short_description = _('Name')
+    def get_name(self, obj):
+        return obj.name
+    get_name.short_description = _('Name')
 
 
-class SliderItemAdmin(MultilingualPublishMixin, TranslationAdmin):
+class SliderItemAdmin(TranslatableAdmin):
     """Admin for the ``SliderItem`` model."""
-    list_display = ['title', 'position', 'languages', 'is_published']
+    list_display = ['get_title', 'position', 'all_translations',
+                    'get_is_published']
 
-    def title(self, obj):
-        lang = get_language()
-        return get_preferred_translation_from_lang(obj, lang).title
-    title.short_description = _('Title')
+    def get_title(self, obj):
+        return obj.title
+    get_title.short_description = _('Title')
+
+    def get_is_published(self, obj):
+        return obj.is_published
+    get_is_published.short_description = _('Is published')
+    get_is_published.boolean = True
 
 
 admin.site.register(models.SliderItem, SliderItemAdmin)
