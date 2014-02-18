@@ -8,6 +8,11 @@ from django.db import models
 
 class Migration(SchemaMigration):
 
+    needed_by = (
+        ('multilingual_events', '0038_migrate_placeholders'),
+        ('document_library', '0021_migrate_placeholders'),
+    )
+
     def forwards(self, orm):
         # Adding field 'SliderItem.category'
         db.add_column('hero_slider_slideritem', 'category',
