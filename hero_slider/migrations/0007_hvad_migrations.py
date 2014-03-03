@@ -16,7 +16,7 @@ class Migration(SchemaMigration):
             pass
         db.rename_column('hero_slider_slideritem_translation', 'slider_item_id', 'master_id')
         db.rename_column('hero_slider_slideritem_translation', 'language', 'language_code')
-        db.alter_column('hero_slider_slideritem_translation', 'master_id', models.ForeignKey(to=orm['hero_slider.slideritem']))
+        db.alter_column('hero_slider_slideritem_translation', 'master_id', models.ForeignKey(to=orm['hero_slider.SliderItem']))
 
         # Adding unique constraint on 'SliderItemTranslation', fields ['language_code', 'master']
         db.create_unique('hero_slider_slideritem_translation', ['language_code', 'master_id'])
@@ -28,7 +28,7 @@ class Migration(SchemaMigration):
             pass
         db.rename_column('hero_slider_slideritemcategory_translation', 'slider_item_category_id', 'master_id')
         db.rename_column('hero_slider_slideritemcategory_translation', 'language', 'language_code')
-        db.alter_column('hero_slider_slideritemcategory_translation', 'master_id', models.ForeignKey(to=orm['hero_slider.slideritemcategory']))
+        db.alter_column('hero_slider_slideritemcategory_translation', 'master_id', models.ForeignKey(to=orm['hero_slider.SliderItemCategory']))
 
         # Adding unique constraint on 'SliderItemCategoryTranslation', fields ['language_code', 'master']
         db.create_unique('hero_slider_slideritemcategory_translation', ['language_code', 'master_id'])
