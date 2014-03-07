@@ -24,6 +24,11 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
+        'django',
+        'pillow',
+        'django-hvad',
+        'django-filer',
+        'south'
         'django-libs',
     ],
     tests_require=[

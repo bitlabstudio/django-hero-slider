@@ -9,14 +9,6 @@ a generic foreign key to any object in your database.
 Installation
 ------------
 
-You need to install the following prerequisites in order to use this app::
-
-    pip install Django
-    pip install Pillow
-    pip install django-filer
-    pip install simple-translation
-    pip install South
-
 If you want to install the latest stable release from PyPi::
 
     $ pip install django-hero-slider
