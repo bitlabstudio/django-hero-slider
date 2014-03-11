@@ -3,18 +3,20 @@
 # ===========================================================================
 # Packages essential to this app. Needed by anyone who wants to use this app.
 # ===========================================================================
-django==1.4.3
-Pillow==1.7.8
-django-filer==0.9.3
-simple-translation==0.8.6
-South==0.7.6
-django-libs
+
+django==1.6.2
+-e git+https://github.com/KristianOellegaard/django-hvad.git@0e2101f15404eaf9611cd6cf843bfc424117b227#egg=hvad
+South==0.8.4
+
+-e git+https://github.com/divio/django-cms.git@8327844ff84df60e36c9ef1a8f2e63d740519a51#egg=cms
+django-filer==0.9.5
 
 
 # ==============================================================
 # Packages needed for running the tests. Needed by contributors.
 # ==============================================================
 factory-boy
+django-libs
 Fabric
 mock
 django-nose

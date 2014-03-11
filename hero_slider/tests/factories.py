@@ -2,21 +2,21 @@
 """Factories for the ``hero_slider`` app."""
 import factory
 
-from django_libs.tests.factories import SimpleTranslationMixin
+from django_libs.tests.factories import HvadFactoryMixin
 from filer.models.imagemodels import Image
 
 from .. import models
 from .test_app.models import DummyModel
 
 
-class DummyModelFactory(factory.Factory):
+class DummyModelFactory(factory.DjangoModelFactory):
     """Factory for ``DummyModel`` objects."""
     FACTORY_FOR = DummyModel
 
     name = 'A name'
 
 
-class FilerImageFactory(factory.Factory):
+class FilerImageFactory(factory.DjangoModelFactory):
     """Factory for ``Image`` objects of the django-filer app."""
     FACTORY_FOR = Image
 
@@ -25,50 +25,21 @@ class FilerImageFactory(factory.Factory):
     file = None
 
 
-class SliderItemCategoryFactory(SimpleTranslationMixin, factory.Factory):
+class SliderItemCategoryFactory(HvadFactoryMixin, factory.DjangoModelFactory):
     """Factory for ``SliderItemCategory`` objects."""
     FACTORY_FOR = models.SliderItemCategory
 
-    @staticmethod
-    def _get_translation_factory_and_field():
-        return (SliderItemCategoryTitleFactory, 'slider_item_category')
+    # for recent unicode errors, we added an 'Umlaut'
+    name = factory.Sequence(lambda n: 'näme {0}'.format(n))
 
 
-class SliderItemCategoryTitleFactory(factory.Factory):
-    """Factory for ``SliderItemCategoryTitle`` objects."""
-    FACTORY_FOR = models.SliderItemCategoryTitle
-
-    name = 'Cätegory'
-    slider_item_category = factory.SubFactory(SliderItemCategoryFactory)
-    language = 'en'
-
-
-class SliderItemFactory(factory.Factory):
+class SliderItemFactory(factory.DjangoModelFactory):
     """Factory for ``SliderItem`` objects."""
     FACTORY_FOR = models.SliderItem
 
     image = factory.SubFactory(FilerImageFactory)
     content_object = factory.SubFactory(DummyModelFactory)
-
-
-class SliderItemTitleFactoryBase(factory.Factory):
-    """Base class for ``SliderItemTitle`` factories."""
-    FACTORY_FOR = models.SliderItemTitle
-
-    slider_item = factory.SubFactory(SliderItemFactory)
-
-
-class SliderItemTitleENFactory(SliderItemTitleFactoryBase):
-    """Factory for english ``SliderItemTitle`` objects."""
-    title = 'A title'
-    description = 'A description'
-    language = 'en'
+    title = factory.Sequence(lambda n: 'title {0}'.format(n))
+    description = factory.Sequence(lambda n: 'description {0}'.format(n))
     is_published = True
-
-
-class SliderItemTitleDEFactory(SliderItemTitleFactoryBase):
-    """Factory for german ``SliderItemTitle`` objects."""
-    title = 'Ein Titel'
-    description = 'Eine Beschreibung'
-    language = 'de'
-    is_published = True
+    language_code = 'en'

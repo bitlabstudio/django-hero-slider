@@ -6,10 +6,7 @@ from hero_slider.templatetags.hero_slider_tags import (
     get_slider_items,
     render_hero_slider,
 )
-from hero_slider.tests.factories import (
-    SliderItemTitleDEFactory,
-    SliderItemTitleENFactory,
-)
+from hero_slider.tests.factories import SliderItemFactory
 
 
 class GetSliderItemsTestCase(TestCase):
@@ -17,7 +14,7 @@ class GetSliderItemsTestCase(TestCase):
     longMessage = True
 
     def test_tag(self):
-        SliderItemTitleENFactory()
+        SliderItemFactory()
         req = RequestFactory().get('/')
         req.LANGUAGE_CODE = 'en'
         context = RequestContext(req)
@@ -31,12 +28,15 @@ class RenderHeroSliderTestCase(TestCase):
     longMessage = True
 
     def setUp(self):
-        self.de_title = SliderItemTitleDEFactory()
-        SliderItemTitleENFactory(
-            slider_item=self.de_title.slider_item, is_published=False)
-        self.en_title = SliderItemTitleENFactory()
-        SliderItemTitleDEFactory(
-            slider_item=self.en_title.slider_item, is_published=False)
+        self.de_item = SliderItemFactory(language_code='de')
+        new_item = self.de_item.translate('en')
+        new_item.is_published = False
+        new_item.save()
+
+        self.en_item = SliderItemFactory()
+        new_item = self.en_item.translate('de')
+        new_item.is_published = False
+        new_item.save()
 
     def test_tag(self):
         req = RequestFactory().get('/')
@@ -47,7 +47,7 @@ class RenderHeroSliderTestCase(TestCase):
         self.assertEqual(len(result['slider_items']), 1, msg=(
             'When set to English, it should return one item.'))
         self.assertEqual(
-            result['slider_items'][0], self.en_title.slider_item, msg=(
+            result['slider_items'][0], self.en_item, msg=(
                 'When set to English, it should return the english item.'))
 
         req.LANGUAGE_CODE = 'de'
@@ -56,7 +56,7 @@ class RenderHeroSliderTestCase(TestCase):
         self.assertEqual(len(result['slider_items']), 1, msg=(
             'When set to German, it should return one item.'))
         self.assertEqual(
-            result['slider_items'][0], self.de_title.slider_item, msg=(
+            result['slider_items'][0], self.de_item, msg=(
                 'When set to English, it should return the german item.'))
 
         req = RequestFactory().get('/')

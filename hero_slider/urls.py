@@ -1,5 +1,5 @@
 """URLs for the ``hero_slider`` app."""
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 
 from hero_slider.views import GetCTypeDetails
 
