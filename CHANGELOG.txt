@@ -1,6 +1,10 @@
 === ongoing ===
 
 
+=== 1.0.1 ===
+
+- fixed requirements
+
 === 1.0 ===
 
 - updated to django-hvad
