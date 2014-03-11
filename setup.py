@@ -28,7 +28,7 @@ setup(
         'pillow',
         'django-hvad',
         'django-filer',
-        'south'
+        'south',
         'django-libs',
     ],
     tests_require=[
