@@ -89,6 +89,11 @@ class SliderItem(TranslatableModel):
             verbose_name=_('Description'),
             blank=True,
         ),
+        link_text=models.CharField(
+            max_length=512,
+            verbose_name=_('Link text'),
+            blank=True,
+        ),
         is_published=models.BooleanField(
             verbose_name=_('Is published'),
             default=False,

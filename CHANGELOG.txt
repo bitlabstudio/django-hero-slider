@@ -1,5 +1,6 @@
 === ongoing ===
 
+- Added link_text field
 
 === 1.0.1 ===
 
