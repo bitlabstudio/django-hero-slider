@@ -50,6 +50,8 @@ class SliderItem(TranslatableModel):
     translated:
     :title: The title of this slider item.
     :description: A short description of this slider item.
+    :link_text: If you want to render a call to action button on the slide,
+      you can define the link text here.
     :is_published: If True, this will not show up.
 
     """

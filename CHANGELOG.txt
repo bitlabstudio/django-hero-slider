@@ -1,5 +1,7 @@
 === ongoing ===
 
+- Added `position` field to `list_editable` on SliderItem admin 
+
 === 1.1 ===
 
 - Added link_text field

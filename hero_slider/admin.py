@@ -20,6 +20,7 @@ class SliderItemAdmin(TranslatableAdmin):
     """Admin for the ``SliderItem`` model."""
     list_display = ['get_title', 'position', 'all_translations',
                     'get_is_published']
+    list_editable = ['position', ]
 
     def get_title(self, obj):
         return obj.title
