@@ -1,4 +1,6 @@
-=== ongoing ===
+=== ongoing (1.2.X to be released as 1.3) ===
+
+=== 1.2 ===
 
 - Added `position` field to `list_editable` on SliderItem admin 
 
