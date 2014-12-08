@@ -9,15 +9,39 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'SliderItemTranslation.link_text'
-        db.add_column(u'hero_slider_slideritem_translation', 'link_text',
-                      self.gf('django.db.models.fields.CharField')(default='', max_length=512, blank=True),
+        # Adding field 'SliderItem.text_position_top'
+        db.add_column(u'hero_slider_slideritem', 'text_position_top',
+                      self.gf('django.db.models.fields.IntegerField')(null=True, blank=True),
+                      keep_default=False)
+
+        # Adding field 'SliderItem.text_position_bottom'
+        db.add_column(u'hero_slider_slideritem', 'text_position_bottom',
+                      self.gf('django.db.models.fields.IntegerField')(null=True, blank=True),
+                      keep_default=False)
+
+        # Adding field 'SliderItem.text_position_left'
+        db.add_column(u'hero_slider_slideritem', 'text_position_left',
+                      self.gf('django.db.models.fields.IntegerField')(null=True, blank=True),
+                      keep_default=False)
+
+        # Adding field 'SliderItem.text_position_right'
+        db.add_column(u'hero_slider_slideritem', 'text_position_right',
+                      self.gf('django.db.models.fields.IntegerField')(null=True, blank=True),
                       keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting field 'SliderItemTranslation.link_text'
-        db.delete_column(u'hero_slider_slideritem_translation', 'link_text')
+        # Deleting field 'SliderItem.text_position_top'
+        db.delete_column(u'hero_slider_slideritem', 'text_position_top')
+
+        # Deleting field 'SliderItem.text_position_bottom'
+        db.delete_column(u'hero_slider_slideritem', 'text_position_bottom')
+
+        # Deleting field 'SliderItem.text_position_left'
+        db.delete_column(u'hero_slider_slideritem', 'text_position_left')
+
+        # Deleting field 'SliderItem.text_position_right'
+        db.delete_column(u'hero_slider_slideritem', 'text_position_right')
 
 
     models = {
@@ -78,14 +102,14 @@ class Migration(SchemaMigration):
             'Meta': {'ordering': "('name',)", 'unique_together': "(('parent', 'name'),)", 'object_name': 'Folder'},
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            u'level': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            u'lft': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'owner': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'filer_owned_folders'", 'null': 'True', 'to': u"orm['auth.User']"}),
             'parent': ('django.db.models.fields.related.ForeignKey', [], {'blank': 'True', 'related_name': "'children'", 'null': 'True', 'to': "orm['filer.Folder']"}),
-            'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
-            'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            u'rght': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
+            u'tree_id': ('django.db.models.fields.PositiveIntegerField', [], {'db_index': 'True'}),
             'uploaded_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'})
         },
         u'hero_slider.slideritem': {
@@ -96,7 +120,11 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['filer.File']"}),
             'object_id': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'position': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'})
+            'position': ('django.db.models.fields.PositiveIntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'text_position_bottom': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'text_position_left': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'text_position_right': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
+            'text_position_top': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'})
         },
         u'hero_slider.slideritemcategory': {
             'Meta': {'object_name': 'SliderItemCategory'},

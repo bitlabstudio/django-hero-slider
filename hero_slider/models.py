@@ -46,6 +46,10 @@ class SliderItem(TranslatableModel):
     :content_type: The contenttype of the object this slider item links to.
     :object_id: The PK of the object this slider item links to.
     :external_url: URL to link to items without the need of a gfk.
+    :text_position_top: Text position.
+    :text_position_bottom: Text position.
+    :text_position_left: Text position.
+    :text_position_right: Text position.
 
     translated:
     :title: The title of this slider item.
@@ -80,6 +84,27 @@ class SliderItem(TranslatableModel):
         max_length=512,
         blank=True,
     )
+
+    text_position_top = models.IntegerField(
+        verbose_name=_('Text position top'),
+        blank=True, null=True,
+    )
+
+    text_position_bottom = models.IntegerField(
+        verbose_name=_('Text position bottom'),
+        blank=True, null=True,
+    )
+
+    text_position_left = models.IntegerField(
+        verbose_name=_('Text position left'),
+        blank=True, null=True,
+    )
+
+    text_position_right = models.IntegerField(
+        verbose_name=_('Text position right'),
+        blank=True, null=True,
+    )
+
     translations = TranslatedFields(
         title=models.CharField(
             max_length=256,
