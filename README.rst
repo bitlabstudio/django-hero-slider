@@ -23,7 +23,7 @@ Add ``filer``, ``easy_thumbnails``  and ``hero_slider`` to your
     INSTALLED_APPS = (
         ...,
         'filer',
-        'easy_thumbnails'
+        'easy_thumbnails',
         'hero_slider',
     )
 
