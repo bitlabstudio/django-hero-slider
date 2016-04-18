@@ -1,5 +1,6 @@
 === ongoing (1.2.X to be released as 1.3) ===
 
+- Prepared app for Django 1.9 and Python 3.5
 - Added text position fields
 
 === 1.2 ===

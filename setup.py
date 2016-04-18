@@ -28,16 +28,6 @@ setup(
         'pillow',
         'django-hvad',
         'django-filer',
-        'south',
         'django-libs',
     ],
-    tests_require=[
-        'fabric',
-        'factory_boy',
-        'django-nose',
-        'coverage',
-        'django-coverage',
-        'mock',
-    ],
-    test_suite='hero_slider.tests.runtests.runtests',
 )

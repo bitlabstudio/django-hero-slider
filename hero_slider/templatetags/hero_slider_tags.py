@@ -1,7 +1,7 @@
 """Templatetags for the ``hero_slider`` app."""
 from django import template
 
-from hero_slider.models import SliderItem
+from ..models import SliderItem
 
 
 register = template.Library()

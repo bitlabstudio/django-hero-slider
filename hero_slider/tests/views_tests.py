@@ -1,22 +1,21 @@
 """Tests for the views of the ``hero_slider`` app."""
 from django.contrib.contenttypes.models import ContentType
-from django.http import Http404
-from django.test import RequestFactory, TestCase
+from django.test import TestCase
 
-from hero_slider.views import GetCTypeDetails
+from django_libs.tests.mixins import ViewRequestFactoryTestMixin
+
+from ..views import GetCTypeDetails
 
 
-class GetCTypeDetailsTestCase(TestCase):
+class GetCTypeDetailsTestCase(ViewRequestFactoryTestMixin, TestCase):
     """Tests for the ``GetCTypeDetails`` view class."""
+    view_class = GetCTypeDetails
+
     def test_view(self):
-        req = RequestFactory().get('/')
-        req.GET = {'pk': 1, }
-        resp = GetCTypeDetails.as_view()(req)
+        resp = self.is_callable(data={'pk': 1, })
         ctype = ContentType.objects.get(pk=1)
-        self.assertTrue(ctype.app_label in resp.content, msg=(
+        self.assertIn(ctype.app_label, resp.content.decode('utf-8'), msg=(
             'Should return a JSON string containing app_label and model'))
 
     def test_bad_pk(self):
-        req = RequestFactory().get('/')
-        req.GET = {'pk': 999, }
-        self.assertRaises(Http404, GetCTypeDetails.as_view(), req)
+        self.is_not_callable(data={'pk': 999, })

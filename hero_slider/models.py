@@ -1,15 +1,16 @@
 """Models for the ``hero_slider`` app."""
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from django_libs.models_mixins import HvadPublishedManager
+from django_libs.models_mixins import (
+    HvadPublishedManager, TranslationModelMixin)
 from filer.fields.file import FilerFileField
 from hvad.models import TranslatedFields, TranslatableModel
 
 
-class SliderItemCategory(TranslatableModel):
+class SliderItemCategory(TranslationModelMixin, TranslatableModel):
     """
     Each slider item can belong to a category.
 
@@ -30,11 +31,8 @@ class SliderItemCategory(TranslatableModel):
         )
     )
 
-    def __unicode__(self):
-        return self.safe_translation_getter('name', self.slug)
 
-
-class SliderItem(TranslatableModel):
+class SliderItem(TranslationModelMixin, TranslatableModel):
     """
     Resembles an item that should be shown on the front page in a slider.
 
@@ -77,7 +75,7 @@ class SliderItem(TranslatableModel):
     # Generic foreign key
     content_type = models.ForeignKey(ContentType, blank=True, null=True)
     object_id = models.PositiveIntegerField(blank=True, null=True)
-    content_object = generic.GenericForeignKey('content_type', 'object_id')
+    content_object = GenericForeignKey('content_type', 'object_id')
 
     external_url = models.CharField(
         verbose_name=_('External URL'),

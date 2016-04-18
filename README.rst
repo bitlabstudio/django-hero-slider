@@ -35,7 +35,7 @@ Include the urls for this app::
         url(r'^hero-slider/', include('hero_slider.urls')),
     )
 
-Run the South migrations::
+Run the migrations::
 
     ./manage.py migrate
 
@@ -76,28 +76,21 @@ If you want to change the look and feel of the slider, just override the
 Contribute
 ----------
 
-If you want to contribute to this project, please perform the following steps::
+If you want to contribute to this project, please perform the following steps
+
+.. code-block:: bash
 
     # Fork this repository
     # Clone your fork
-    $ mkvirtualenv -p python2.7 django-hero-slider
-    $ pip install -r requirements.txt
-    $ ./logger/tests/runtests.sh
-    # You should get no failing tests
+    mkvirtualenv -p python2.7 django-hero-slider
+    make develop
 
-    $ git co -b feature_branch master
+    git co -b feature_branch master
     # Implement your feature and tests
-    # Describe your change in the CHANGELOG.txt
-    $ git add . && git commit
-    $ git push origin feature_branch
+    git add . && git commit
+    git push -u origin feature_branch
     # Send us a pull request for your feature branch
 
-Whenever you run the tests a coverage output will be generated in
-``tests/coverage/index.html``. When adding new features, please make sure that
-you keep the coverage at 100%.
-
-
-Roadmap
--------
-
-Check the issue tracker on github for milestones and features to come.
+In order to run the tests, simply execute ``tox``. This will install two new
+environments (for Django 1.8 and Django 1.9) and run the tests against both
+environments.

@@ -1,10 +1,9 @@
 """URLs for the ``hero_slider`` app."""
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-from hero_slider.views import GetCTypeDetails
+from .views import GetCTypeDetails
 
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'ctype/$', GetCTypeDetails.as_view(), name='get_ctype_details'),
-)
+]
