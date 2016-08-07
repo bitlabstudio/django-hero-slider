@@ -27,6 +27,10 @@ Add ``filer``, ``easy_thumbnails``  and ``hero_slider`` to your
         'hero_slider',
     )
 
+If you have ``sorl-thumbnail`` already in your ``INSTALLED_APPS`` you may run across some errors since ``sorl-thumbnail`` and ``easy_thumbnail`` use the same load template tag syntax ``{% load thumbnail %}``. Please see more details `here <discussion_>`_
+
+.. _discussion: http://stackoverflow.com/questions/8174122/django-sorl-thumbnail-and-easy-thumbnail-in-same-project
+
 Include the urls for this app::
 
 
